@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version="2.1">
+    <!-- Welcome and Main Menu -->
+    <form id="mainMenu">
+        <block>
+            <prompt>Welcome to the Weather Voice Service. Please choose an option.</prompt>
+        </block>
+
+        <field name="menuChoice">
+            <prompt>
+                For Weather Forecast, press 1.
+                For Sun Intensity, press 2.
+                For Wind Alerts, press 3.
+                For Radio Broadcast, press 4.
+                To return to the main menu at any time, press 0.
+            </prompt>
+            <grammar xml:lang="en-US" root="menuChoice">
+                <rule id="menuChoice" scope="public">
+                    <one-of>
+                        <item>1</item>
+                        <item>2</item>
+                        <item>3</item>
+                        <item>4</item>
+                        <item>0</item>
+                    </one-of>
+                </rule>
+            </grammar>
+        </field>
+
+        <filled>
+            <if cond="menuChoice == '1'">
+                <goto next="#weatherForecast"/>
+            </if>
+            <elseif cond="menuChoice == '2'">
+                <goto next="#sunIntensity"/>
+            </elseif>
+            <elseif cond="menuChoice == '3'">
+                <goto next="#windAlerts"/>
+            </elseif>
+            <elseif cond="menuChoice == '4'">
+                <goto next="#radioBroadcast"/>
+            </elseif>
+            <else>
+                <prompt>Invalid option, please try again.</prompt>
+                <reprompt/>
+            </else>
+        </filled>
+    </form>
+
+    <!-- Weather Forecast -->
+    <form id="weatherForecast">
+        <block>
+            <prompt>The weather today will be sunny with a high of 75 degrees and a low of 50 degrees.</prompt>
+            <goto next="#mainMenu"/>
+        </block>
+    </form>
+
+    <!-- Sun Intensity -->
+    <form id="sunIntensity">
+        <block>
+            <prompt>The sun intensity today is moderate. It is recommended to wear sunscreen if you are going outside.</prompt>
+            <goto next="#mainMenu"/>
+        </block>
+    </form>
+
+    <!-- Wind Alerts -->
+    <form id="windAlerts">
+        <block>
+            <prompt>There are currently no wind alerts for today. Enjoy your day!</prompt>
+            <goto next="#mainMenu"/>
+        </block>
+    </form>
+
+    <!-- Radio Broadcast -->
+    <form id="radioBroadcast">
+        <block>
+            <prompt>You are now listening to the live radio broadcast. Please press 0 to return to the main menu.</prompt>
+            <goto next="#mainMenu"/>
+        </block>
+    </form>
+</vxml>
